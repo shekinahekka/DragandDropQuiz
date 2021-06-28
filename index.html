@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.14.2/matter.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"></script>
+  <script src="p5.play.js"></script>
+  <script src="matter.js"></script>
+  <script src="./p5.sound.js"></script>
+  <title>Drag and Drop quiz</title>
+  <script src="sketch.js"></script>
+  <link rel="stylesheet" href="./style.css" href="assets/Signika-VariableFont_wght.ttf">
+</head>
+
+<body>
+  <div class="container">
+  <div class="leftBox" id="leftBox1" data-accept="1" ondrop="drop(event)" ondragover="allowDrop(event)" >
+    <h1>1</h1>
+  </div>
+
+  <div class="leftBox" id="leftBox2" data-accept="2" ondrop="drop(event)" ondragover="allowDrop(event)">
+    <h1>2</h1>
+  </div>
+  
+  <div class="leftBox" id="leftBox3" data-accept="3" ondrop="drop(event)" ondragover="allowDrop(event)">
+    <h1>3</h1>
+  </div>
+  
+  <div class="rightBox" id="leftBox4" data-accept="4" ondrop="drop(event)" ondragover="allowDrop(event)">
+    <h1>4</h1>
+  </div>
+  
+  <div class="rightBox" data-accept="5" ondrop="drop(event)" ondragover="allowDrop(event)">
+    <h1>5</h1>
+  </div>
+  
+  <div class="rightBox" data-accept="6" ondrop="drop(event)" ondragover="allowDrop(event)">
+    <h1>6</h1>
+  </div>
+  
+</div>
+
+  <div id="parent">
+    <input type="image" value="click me" class="cut" id="mybtn" img src="./assets/Asset 22.png" width="60" height="60">
+    <div id="cursorblink">
+      <img class="imgg" src='./assets/Asset 21.png' width="50%" height="40%" />
+      <h2 class="first-text">Hi! I have a story to tell.<br>Can you drag and drop the elements <br>in correct
+        order?</br></br></h2>
+    </div>
+  </div>
+  <div class="container">
+  <div class="whiteBox" id="box1" draggable="true" data-target="3" ondragstart="drag(event)"><img src="./assets/Asset 15.png" width="150" height="150"/><p>therefore</p></div>
+  <div class="whiteBox" id="box2" draggable="true" data-target="1" ondragstart="drag(event)"><img src="./assets/Asset 13.png" width="150" height="150" /><p>conclusions</p></div>
+  <div class="whiteBox" id="box3" draggable="true" data-target="2" ondragstart="drag(event)"><img src="./assets/Asset 14.png" width="150" height="150" /><p>but</p></div>
+  <div class="whiteBox" id="box4" draggable="true" data-target="6" ondragstart="drag(event)"><img src="./assets/Asset 18.png" width="150" height="150" /><p>1 and</p></div>
+  <div class="whiteBox" id="box5" draggable="true" data-target="5" ondragstart="drag(event)"><img src="./assets/Asset 17.png" width="150" height="150" /><p>why</p></div>
+  <div class="whiteBox" id="box6" draggable="true" data-target="4" ondragstart="drag(event)"><img src="./assets/Asset 16.png" width="150" height="150" /><p>2 and</p></div>
+  </div>
+
+  <script>
+    document.getElementById("mybtn").addEventListener("click", function () {
+      var mybox = document.getElementById("cursorblink");
+      var mybutton = document.getElementById("mybtn")
+      mybutton.style.display = "none"
+      mybox.style.display = "none";
+
+    })
+  </script>
+
+  <script>
+   function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function drag(ev) {
+  ev.dataTransfer.setData("whiteBox", ev.target.id);
+ selectSound.play();
+}
+
+function drop(ev) {
+  ev.preventDefault();
+  var data = ev.dataTransfer.getData("whiteBox");
+  selectsound.play();
+  if(document.getElementById(data).getAttribute("data-target")==ev.target.getAttribute("data-accept")){
+  document.getElementById(data).className=ev.target.getAttribute("class");
+  ev.target.replaceWith(document.getElementById(data));
+  successSound.play();
+  }
+  else
+  {
+    errorSound.play();
+    alert("Try again");
+    
+  }
+  }
+
+</script>
+
+</body>
+
+</html>
